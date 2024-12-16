@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Navigation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body onclick="nextPanel()">
+    <!-- Intro Panels -->
+    <div id="panel1" class="panel active">
+        <h1 class="slate-shimmer">Know what you <br>listen to</h1>
+    </div>
+    
+    <div id="panel2" class="panel">
+        <h1 class="slate-shimmer">Where Music<br>Meets Intelligence</h1>
+    </div>
+    
+    <div id="panel3" class="panel">
+        <h1 class="slate-shimmer">Your Journey<br>Begins Now</h1>
+    </div>
+
+    <!-- Name Input Panel -->
+    <div id="panel4" class="panel">
+        <div class="name-input-wrapper">
+            <h1 class="slate-shimmer">What's your name?</h1>
+            <div class="input-group">
+                <input type="text" id="user-name" class="name-input" placeholder="Type your name here" onclick="event.stopPropagation()">
+                <button class="continue-btn" onclick="event.stopPropagation(); saveName()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Classifier Panel -->
+    <div id="panel5" class="panel">
+        <div class="container">
+            <h1 class="glow-title">Music Genre Classifier</h1>
+            <h2 id="welcome-message" class="slate-shimmer">Hello <span class="name-highlight"></span></h2>
+            
+            <div class="upload-section">
+                <input type="file" id="file-upload" class="file-input" accept="audio/*">
+                <button class="upload-btn" onclick="event.stopPropagation(); document.getElementById('file-upload').click()">
+                    Upload Music File
+                </button>
+                <p class="slate-shimmer" style="font-size: 1.2em;">or drag and drop your file here</p>
+                <div class="custom-audio-player">
+                    <div class="player-controls">
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="time">
+                                <span class="current">0:00</span>
+                                <span class="duration">0:00</span>
+                            </div>
+                        </div>
+                        <div class="volume-control">
+                            <i class="fas fa-volume-up"></i>
+                            <input type="range" min="0" max="100" value="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading-container" id="loading-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text slate-shimmer">Analyzing your music...</div>
+            </div>
+
+            <div class="results" id="results">
+                <h2 class="slate-shimmer">Classification Results</h2>
+                <div id="genre" class="slate-shimmer"></div>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" id="confidence"></div>
+                </div>
+            </div>
+
+            <div class="info-buttons">
+                <button class="info-btn" onclick="event.stopPropagation(); showAbout()">
+                    <i class="fas fa-info-circle"></i> About
+                </button>
+                <button class="info-btn" onclick="event.stopPropagation(); showCreators()">
+                    <i class="fas fa-users"></i> Creators
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="click-text">Click anywhere to continue</div>
+
+    <!-- About Panel -->
+    <div id="about-panel" class="info-panel">
+        <div class="panel-header">
+            <h2 class="slate-shimmer">About This Project</h2>
+            <button class="back-btn" onclick="event.stopPropagation(); hideInfoPanels()">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+        <div class="info-content">
+            <p class="slate-shimmer">A music genre classifier powered by a custom convolutional neural network made from scratch, capable of analyzing and identifying musical patterns across ten genres.</p>
+            <p class="slate-shimmer">Built using TensorFlow, this project can analyze audio files and determine their musical genre with a decent accuracy.</p>
+            <p class="slate-shimmer">The classifier is trained on a dataset of music spanning ten distinct genres and predicts the results using melspectrograms of the audio files</p>
+        </div>
+    </div>
+
+    <!-- Creators Panel -->
+    <div id="creators-panel" class="info-panel">
+        <div class="panel-header">
+            <button class="back-btn" onclick="event.stopPropagation(); hideInfoPanels()">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <small class="easter-egg slate-shimmer">without them it would be impossible</small>
+        </div>
+        <div class="creators-grid">
+            <div class="creator-card">
+                <h3 class="slate-shimmer">Vishnu Shankar</h3>
+                <div class="creator-links">
+                    <a href="https://github.com/SirBoink" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/vishnu-shankar-2365a6324" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="vishnusevenfive@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="creator-card">
+                <h3 class="slate-shimmer">Shivansh Sharma</h3>
+                <div class="creator-links">
+                    <a href="https://github.com/ShivanshSSS" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="http://www.linkedin.com/in/shivansh-sharma-9a7a45268" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="shivanshshaema0000@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="creator-card">
+                <h3 class="slate-shimmer">Ritika Tyagi</h3>
+                <div class="creator-links">
+                    <a href="https://github.com/RitikaTyagi" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/ritikatyagii/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="ritikatyagi0501@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="creator-card">
+                <h3 class="slate-shimmer">Ayushman Nanda</h3>
+                <div class="creator-links">
+                    <a href="https://github.com/M0tracno" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/ayushman-nanda-4a1377312" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="ayushman.23bce10878@vitbhopal.ac.in "><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analysis Panel -->
+    <div id="analysis-panel" class="panel">
+        <div class="analysis-container">
+            <div class="panel-header">
+                <button class="back-btn" onclick="event.stopPropagation(); returnToUpload()">
+                    <i class="fas fa-arrow-left"></i> Back to Upload
+                </button>
+            </div>
+            <div class="analysis-content">
+                <div class="easter-egg-verdict">and the verdict is...</div>
+                <div id="results-container"></div>
+                <div class="analysis-actions">
+                    <button class="back-btn analyze-again-btn" onclick="event.stopPropagation(); resetForNewAnalysis()">
+                        <i class="fas fa-redo"></i> Analyze Another Song
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <audio id="audio-player"></audio>
+</body>
+</html>
