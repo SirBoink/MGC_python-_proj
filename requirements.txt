@@ -1,0 +1,10 @@
+Flask==2.0.1
+Flask-Cors==3.0.10
+Flask-Limiter==3.3.0
+gevent==22.10.2
+librosa==0.10.0
+numpy==1.23.5
+scikit-image==0.21.0
+tensorflow==2.12.0
+Werkzeug==2.2.3
+waitress==2.1.2
